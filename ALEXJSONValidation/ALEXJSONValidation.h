@@ -14,6 +14,6 @@ typedef NS_OPTIONS(NSUInteger, ALEXJSONValidationOptions) {
 
 @interface ALEXJSONValidation : NSObject
 
-+ (BOOL)validateJSONObject:(id)object forJSONSchema:(NSURL*)schemaURL options:(ALEXJSONValidationOptions)options error:(NSError**)error;
++ (BOOL)validateJSONObject:(id)object forJSONSchemaAtURL:(NSURL*)schemaURL options:(ALEXJSONValidationOptions)options error:(NSError**)error;
 
 @end

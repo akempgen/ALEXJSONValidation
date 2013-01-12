@@ -29,9 +29,12 @@
 - (void)testALEXJSONValidation
 {
 	NSDictionary *obj = @{@"name": @"Hans-Peter"};
+	
+	NSURL *schemaURL = [NSURL URLWithString:@"http://json-schema.org/schema"];
+	
 	NSError *error;
-	BOOL success = [ALEXJSONValidation validateJSONObject:obj forJSONSchema:nil options:0 error:&error];
-	STAssertFalse(success, @"Failed as expected");
+	BOOL success = [ALEXJSONValidation validateJSONObject:obj forJSONSchemaAtURL:schemaURL options:0 error:&error];
+	STAssertTrue(success, @"error: %@", error);
 }
 
 @end
