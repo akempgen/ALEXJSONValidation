@@ -8,10 +8,9 @@
 
 #import "ALEXJSONValidation.h"
 
-#define ALEXJSONValidation_reverseDomainIdentifier @"de.alexander-kempgen.alexjsonvalidation"
+@interface ALEXJSONValidation ()
 
-
-@interface ALEXJSONValidation (Private)
++ (BOOL)validateJSONObject:(id)object forJSONSchema:(id)schema error:(NSError**)error;
 
 + (id)validatedSchemaForURL:(NSURL*)schemaURL error:(NSError**)error;
 + (NSCache *)cache;
@@ -26,14 +25,24 @@
 	
 	id schema = [self validatedSchemaForURL:schemaURL error:error];
 	
-	return schema != nil;
+//	NSLog(@"schema: %@", schema);
+	
+	BOOL valid = (!schema?NO:[self validateJSONObject:object forJSONSchema:schema error:error]);
+	
+	return valid;
 }
 
-@end
++ (BOOL)validateJSONObject:(id)object forJSONSchema:(NSDictionary*)schema error:(NSError**)error {
+	NSParameterAssert(object); // leaf objects are accepted here
+	NSParameterAssert([schema isKindOfClass:[NSDictionary class]]);
+	
+	NSString *type = schema[@"type"];
+	
+	return YES;
+}
 
 
-
-@implementation ALEXJSONValidation (Private)
+#pragma mark - Private
 
 +(id) validatedSchemaForURL:(NSURL*)schemaURL error:(NSError**)error {
 	id schema = [self.cache objectForKey:schemaURL];
@@ -41,25 +50,27 @@
 		NSDate *startDate = [NSDate date];
 		
 		// Load the schema data either from file or over the network
-		NSData *data;
-		if ([schemaURL isFileURL]) {
-			data = [NSData dataWithContentsOfURL:schemaURL options:0 error:error];
-		}
-		else {
-			NSURLRequest *URLRequest = [NSURLRequest requestWithURL:schemaURL];
-			data = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:NULL error:error];
-		}
+		
+		NSData *data = [NSData dataWithContentsOfURL:schemaURL options:0 error:error];
+//		NSData *data;
+//		if ([schemaURL isFileURL]) {
+//			data = [NSData dataWithContentsOfURL:schemaURL options:0 error:error];
+//		}
+//		else {
+//			NSURLRequest *URLRequest = [NSURLRequest requestWithURL:schemaURL];
+//			data = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:NULL error:error];
+//		}
 		
 		// Deserialize the schema
 		if (data)
 			schema = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
 		
 		// Validate the schema itself
-		NSURL *hyperSchemaURL = [NSURL URLWithString:@"http://json-schema.org/hyper-schema"];
+		NSURL *validationSchemaURL = [NSURL URLWithString:@"http://json-schema.org/schema"];
 		// TODO: not ideal, better avoid the loop differently. (ship the schema?)
-		BOOL validSchema = ([schemaURL isEqual:hyperSchemaURL]
+		BOOL validSchema = ([schemaURL isEqual:validationSchemaURL]
 							? YES
-							: [self validateJSONObject:schema forJSONSchemaAtURL:hyperSchemaURL options:0 error:error]);
+							: [self validateJSONObject:schema forJSONSchemaAtURL:validationSchemaURL options:0 error:error]);
 		if (!validSchema)
 			schema = nil;
 		
