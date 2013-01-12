@@ -28,6 +28,7 @@
 		C2DF62E216A1714E00CC096A /* ALEXJSONValidation Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ALEXJSONValidation Tests-Prefix.pch"; sourceTree = "<group>"; };
 		C2DF62E716A1720900CC096A /* ALEXJSONValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALEXJSONValidation.h; sourceTree = "<group>"; };
 		C2DF62E816A1720900CC096A /* ALEXJSONValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALEXJSONValidation.m; sourceTree = "<group>"; };
+		C2DF62EA16A18F5300CC096A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +51,7 @@
 				C2DF62D916A1714E00CC096A /* ALEXJSONValidation Tests */,
 				C2DF62D016A1714E00CC096A /* Frameworks */,
 				C2DF62CF16A1714E00CC096A /* Products */,
+				C2DF62EA16A18F5300CC096A /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
