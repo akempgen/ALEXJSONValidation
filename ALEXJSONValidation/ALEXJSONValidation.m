@@ -25,41 +25,109 @@
 	
 	id schema = [self validatedSchemaForURL:schemaURL error:error];
 	
-//	NSLog(@"schema: %@", schema);
+    //	NSLog(@"schema: %@", schema);
 	
 	BOOL valid = (!schema?NO:[self validateJSONObject:object forJSONSchema:schema error:error]);
 	
 	return valid;
 }
 
+#pragma mark - Private
+
 + (BOOL)validateJSONObject:(id)object forJSONSchema:(NSDictionary*)schema error:(NSError**)error {
 	NSParameterAssert(object); // leaf objects are accepted here
 	NSParameterAssert([schema isKindOfClass:[NSDictionary class]]);
+	BOOL valid = YES;
 	
-	NSString *type = schema[@"type"];
+	id type = schema[@"type"];
+	if (valid && type) {
+		if ([type isKindOfClass:[NSArray class]]) {
+			for (id allowedType in type) {
+				valid = [self validateJSONObject:object forType:allowedType error:error];
+				if (valid)
+					break;
+			}
+		}
+		else {
+			valid = [self validateJSONObject:object forType:type error:error];
+		}
+			
+	}
 	
-	return YES;
+	
+	return valid;
 }
 
 
-#pragma mark - Private
+
++(BOOL)validateJSONObject:(id)object forType:(id)type error:(NSError**)error {
+	BOOL valid = YES;
+	
+	NSString *anyType		= @"any";
+	NSString *stringType	= @"string";
+	NSString *numberType	= @"number";
+	NSString *integerType	= @"integer";
+	NSString *booleanType	= @"boolean";
+	NSString *objectType	= @"object";
+	NSString *arrayType		= @"array";
+	NSString *nullType		= @"null";
+	
+	if ([type isKindOfClass:[NSString class]]) {
+		if (![type isEqualToString:anyType]) {
+			// String
+			if ([type isEqualToString:stringType]) {
+				valid = [object isKindOfClass:[NSString class]];
+			}
+			// number
+			else if ([type isEqualToString:numberType]) {
+				valid = [object isKindOfClass:[NSNumber class]];
+				if (valid)
+					valid = (strncmp([(NSNumber*)object objCType], "q", 1) == 0
+							 || strncmp([(NSNumber*)object objCType], "d", 1) == 0);
+			}
+			// integer
+			else if ([type isEqualToString:integerType]) {
+				valid = [object isKindOfClass:[NSNumber class]];
+				if (valid)
+					valid = (strncmp([(NSNumber*)object objCType], "q", 1) == 0);
+			}
+			// boolean
+			else if ([type isEqualToString:booleanType]) {
+				valid = [object isKindOfClass:[NSNumber class]];
+				if (valid)
+					valid = (strncmp([(NSNumber*)object objCType], "c", 1) == 0);
+			}
+			// object
+			else if ([type isEqualToString:objectType]) {
+				valid = [object isKindOfClass:[NSDictionary class]];
+			}
+			// array
+			else if ([type isEqualToString:arrayType]) {
+				valid = [object isKindOfClass:[NSArray class]];
+			}
+			// null
+			else if ([type isEqualToString:nullType]) {
+				valid = [object isKindOfClass:[NSNull class]];
+			}
+			
+			else {
+				valid = NO;
+			}
+		}
+	}
+	else {
+		valid = [self validateJSONObject:object forJSONSchema:type error:error];
+	}
+	return valid;
+}
 
 +(id) validatedSchemaForURL:(NSURL*)schemaURL error:(NSError**)error {
 	id schema = [self.cache objectForKey:schemaURL];
 	if (!schema) {
 		NSDate *startDate = [NSDate date];
 		
-		// Load the schema data either from file or over the network
-		
+		// Load the schema data from file or over the network
 		NSData *data = [NSData dataWithContentsOfURL:schemaURL options:0 error:error];
-//		NSData *data;
-//		if ([schemaURL isFileURL]) {
-//			data = [NSData dataWithContentsOfURL:schemaURL options:0 error:error];
-//		}
-//		else {
-//			NSURLRequest *URLRequest = [NSURLRequest requestWithURL:schemaURL];
-//			data = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:NULL error:error];
-//		}
 		
 		// Deserialize the schema
 		if (data)
@@ -86,7 +154,7 @@
 
 +(NSCache *)cache {
 	static NSCache *cache;
-	static dispatch_once_t onceToken;
+    static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		cache = [[NSCache alloc] init];
 		cache.name = ALEXJSONValidation_reverseDomainIdentifier @".scheme-cache";
