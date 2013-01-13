@@ -40,10 +40,10 @@
 	[self runTestGroupAtFileURL:fileURL];
 }
 
-//- (void)testTypeSuite {
-//	NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"type" withExtension:@"json"];
-//	[self runTestGroupAtFileURL:fileURL];
-//}
+- (void)testTypeSuite {
+	NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"type" withExtension:@"json"];
+	[self runTestGroupAtFileURL:fileURL];
+}
 
 
 #pragma mark - helper methods

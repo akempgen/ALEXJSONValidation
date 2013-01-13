@@ -35,12 +35,20 @@
 #pragma mark - Private
 
 + (BOOL)validateJSONObject:(id)object forJSONSchema:(NSDictionary*)schema error:(NSError**)error {
-	NSParameterAssert(object); // leaf objects are accepted here
+	NSLog(@"%s object: %@ schema: %@", __PRETTY_FUNCTION__, object, schema);
+//	NSParameterAssert(object != nil); // leaf objects are accepted here
 	NSParameterAssert([schema isKindOfClass:[NSDictionary class]]);
 	BOOL valid = YES;
 	
-	id type = schema[@"type"];
-	if (valid && type) {
+	if (!object) {
+		if ([schema[@"required"] boolValue]) {
+			valid = NO;
+		}
+		return valid;
+	}
+	
+	if (valid) {
+		id type = schema[@"type"];
 		if ([type isKindOfClass:[NSArray class]]) {
 			for (id allowedType in type) {
 				valid = [self validateJSONObject:object forType:allowedType error:error];
@@ -48,12 +56,21 @@
 					break;
 			}
 		}
-		else {
+		else if (type) {
 			valid = [self validateJSONObject:object forType:type error:error];
 		}
 			
 	}
 	
+	if (valid) {
+		id properties = schema[@"properties"];
+//		NSLog(@"object class: %@ properties: %@", NSStringFromClass([object class]), properties);
+		for (NSString *property in properties) {
+			valid = [self validateJSONObject:object[property] forJSONSchema:properties[property] error:error];
+			if (!valid)
+				break;
+		}
+	}
 	
 	return valid;
 }
@@ -61,6 +78,7 @@
 
 
 +(BOOL)validateJSONObject:(id)object forType:(id)type error:(NSError**)error {
+	NSLog(@"%s object: %@ type: %@", __PRETTY_FUNCTION__, object, type);
 	BOOL valid = YES;
 	
 	NSString *anyType		= @"any";
@@ -81,6 +99,7 @@
 			// number
 			else if ([type isEqualToString:numberType]) {
 				valid = [object isKindOfClass:[NSNumber class]];
+				// TODO: these are not good yet
 				if (valid)
 					valid = (strncmp([(NSNumber*)object objCType], "q", 1) == 0
 							 || strncmp([(NSNumber*)object objCType], "d", 1) == 0);
