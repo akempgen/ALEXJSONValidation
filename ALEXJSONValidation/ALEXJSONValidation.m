@@ -144,6 +144,45 @@
 				valid = ([object count] == [set count]);
 			}
 		}
+		// items
+		if (valid) {
+			id items = schema[@"items"];
+			if ([items isKindOfClass:[NSArray class]]) {
+//				NSLog(@"items: %@ object: %@", items, object);
+				NSUInteger tupleIndex = 0;
+				for (NSDictionary *tupleSchema in items) {
+					id tupleObject = (tupleIndex < [object count]?object[tupleIndex]:nil);
+					valid = [self validateJSONObject:tupleObject forJSONSchema:tupleSchema error:error];
+					if (!valid)
+						break;
+					tupleIndex++;
+				}
+				
+				id additionalItems = schema[@"additionalItems"];
+				if ([additionalItems isKindOfClass:[NSNumber class]]) {
+					if ([additionalItems boolValue] == NO) {
+						valid = ([object count] <= [items count]);
+					}
+				}
+				else if (additionalItems) {
+					
+					if ([items count] == 0) {
+						NSLog(@"should explode");
+					}
+					for (NSUInteger index = [items count]-1; index > [object count]; index++) {
+#warning index going -1 here
+					}
+				}
+				
+			}
+			else if (items) {
+				for (id arrayObject in object) {
+					valid = [self validateJSONObject:arrayObject forJSONSchema:items error:error];
+					if (!valid)
+						break;
+				}
+			}
+		}
 	}
 	
 	return valid;

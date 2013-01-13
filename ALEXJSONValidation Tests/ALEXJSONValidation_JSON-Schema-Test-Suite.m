@@ -30,9 +30,9 @@
     [super tearDown];
 }
 
-//- (void)testAdditionalItems {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalItems" withExtension:@"json"]];
-//}
+- (void)testAdditionalItems {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalItems" withExtension:@"json"]];
+}
 
 //- (void)testAdditionalProperties {
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalProperties" withExtension:@"json"]];
@@ -58,9 +58,9 @@
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"extends" withExtension:@"json"]];
 //}
 
-//- (void)testItems {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
-//}
+- (void)testItems {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
+}
 
 - (void)testMaximum {
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maximum" withExtension:@"json"]];
