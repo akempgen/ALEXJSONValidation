@@ -30,7 +30,7 @@
 {
 	NSDictionary *obj = @{@"name": @"Hans-Peter"};
 	
-	NSURL *schemaURL = [NSURL URLWithString:@"http://json-schema.org/schema"];
+	NSURL *schemaURL = [NSURL URLWithString:@"http://json-schema.org/address"];
 	
 	NSError *error;
 	BOOL success = [ALEXJSONValidation validateJSONObject:obj forJSONSchemaAtURL:schemaURL options:0 error:&error];

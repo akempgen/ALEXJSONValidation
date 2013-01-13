@@ -10,7 +10,6 @@
 		C2DF62D216A1714E00CC096A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DF62D116A1714E00CC096A /* SenTestingKit.framework */; };
 		C2DF62D416A1714E00CC096A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DF62D316A1714E00CC096A /* Cocoa.framework */; };
 		C2DF62DE16A1714E00CC096A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2DF62DC16A1714E00CC096A /* InfoPlist.strings */; };
-		C2DF62E116A1714E00CC096A /* ALEXJSONValidation_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DF62E016A1714E00CC096A /* ALEXJSONValidation_Tests.m */; };
 		C2DF62E916A1720900CC096A /* ALEXJSONValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DF62E816A1720900CC096A /* ALEXJSONValidation.m */; };
 		C2DF62ED16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DF62EC16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m */; };
 		C2DF631416A1C26200CC096A /* additionalItems.json in Resources */ = {isa = PBXBuildFile; fileRef = C2DF62F716A1C26200CC096A /* additionalItems.json */; };
@@ -335,7 +334,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2DF62E116A1714E00CC096A /* ALEXJSONValidation_Tests.m in Sources */,
 				C2DF62E916A1720900CC096A /* ALEXJSONValidation.m in Sources */,
 				C2DF62ED16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m in Sources */,
 			);
@@ -487,6 +485,7 @@
 				C2DF62E416A1714E00CC096A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

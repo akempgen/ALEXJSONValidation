@@ -35,7 +35,7 @@
 #pragma mark - Private
 
 + (BOOL)validateJSONObject:(id)object forJSONSchema:(NSDictionary*)schema error:(NSError**)error {
-	NSLog(@"%s object: %@ schema: %@", __PRETTY_FUNCTION__, object, schema);
+//	NSLog(@"%s object: %@ schema: %@", __PRETTY_FUNCTION__, object, schema);
 //	NSParameterAssert(object != nil); // leaf objects are accepted here
 	NSParameterAssert([schema isKindOfClass:[NSDictionary class]]);
 	BOOL valid = YES;
@@ -47,6 +47,7 @@
 		return valid;
 	}
 	
+	// type
 	if (valid) {
 		id type = schema[@"type"];
 		if ([type isKindOfClass:[NSArray class]]) {
@@ -62,6 +63,7 @@
 			
 	}
 	
+	// properties
 	if (valid) {
 		id properties = schema[@"properties"];
 //		NSLog(@"object class: %@ properties: %@", NSStringFromClass([object class]), properties);
@@ -72,13 +74,85 @@
 		}
 	}
 	
+	// 5.1. Validation keywords for numeric instances (number and integer)
+	if (valid && [object isKindOfClass:[NSNumber class]]) {
+		// maximum
+		if (valid) {
+			NSNumber *maximum = schema[@"maximum"];
+			if (maximum) {
+				BOOL exclusiveMaximum = [schema[@"exclusiveMaximum"] boolValue];
+				if (exclusiveMaximum)
+					valid = ([object doubleValue] < [maximum doubleValue]);
+				else
+					valid = ([object doubleValue] <= [maximum doubleValue]);
+			}
+		}
+		// minimum
+		if (valid) {
+			NSNumber *minimum = schema[@"minimum"];
+			if (minimum) {
+				BOOL exclusiveMinimum = [schema[@"exclusiveMinimum"] boolValue];
+				if (exclusiveMinimum)
+					valid = ([object doubleValue] > [minimum doubleValue]);
+				else
+					valid = ([object doubleValue] >= [minimum doubleValue]);
+			}
+		}
+	}
+	
+	// 5.2. Validation keywords for strings
+	if (valid && [object isKindOfClass:[NSString class]]) {
+		// maxLength
+		if (valid) {
+			NSNumber *maxLength = schema[@"maxLength"];
+			if (maxLength) {
+				valid = ([object length] <= [maxLength unsignedIntegerValue]);
+			}
+		}
+		
+		// minLength
+		if (valid) {
+			NSNumber *minLength = schema[@"minLength"];
+			if (minLength) {
+				valid = ([object length] >= [minLength unsignedIntegerValue]);
+			}
+		}
+	}
+	
+	// 5.3. Validation keywords for arrays
+	if (valid && [object isKindOfClass:[NSArray class]]) {
+		// maxItems
+		if (valid) {
+			NSNumber *maxItems = schema[@"maxItems"];
+			if (maxItems) {
+				valid = ([object count] <= [maxItems unsignedIntegerValue]);
+			}
+		}
+		// minItems
+		if (valid) {
+			NSNumber *minItems = schema[@"minItems"];
+			if (minItems) {
+				valid = ([object count] >= [minItems unsignedIntegerValue]);
+			}
+		}
+		// uniqueItems
+		if (valid) {
+			BOOL uniqueItems = [schema[@"uniqueItems"] boolValue];
+			if (uniqueItems) {
+				// TODO: fails 3 uniqueItems tests, because @1 and @YES are considered equal in cocoa, but not in json
+				NSSet *set = [NSSet setWithArray:object];
+				valid = ([object count] == [set count]);
+			}
+		}
+	}
+	
 	return valid;
 }
 
 
 
 +(BOOL)validateJSONObject:(id)object forType:(id)type error:(NSError**)error {
-	NSLog(@"%s object: %@ type: %@", __PRETTY_FUNCTION__, object, type);
+//	NSLog(@"%s object: %@ type: %@", __PRETTY_FUNCTION__, object, type);
 	BOOL valid = YES;
 	
 	NSString *anyType		= @"any";
@@ -153,13 +227,13 @@
 			schema = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
 		
 		// Validate the schema itself
-		NSURL *validationSchemaURL = [NSURL URLWithString:@"http://json-schema.org/schema"];
+//		NSURL *validationSchemaURL = [NSURL URLWithString:@"http://json-schema.org/schema"];
 		// TODO: not ideal, better avoid the loop differently. (ship the schema?)
-		BOOL validSchema = ([schemaURL isEqual:validationSchemaURL]
-							? YES
-							: [self validateJSONObject:schema forJSONSchemaAtURL:validationSchemaURL options:0 error:error]);
-		if (!validSchema)
-			schema = nil;
+//		BOOL validSchema = ([schemaURL isEqual:validationSchemaURL]
+//							? YES
+//							: [self validateJSONObject:schema forJSONSchemaAtURL:validationSchemaURL options:0 error:error]);
+//		if (!validSchema)
+//			schema = nil;
 		
 		// Cache for future use
 		if (schema) {

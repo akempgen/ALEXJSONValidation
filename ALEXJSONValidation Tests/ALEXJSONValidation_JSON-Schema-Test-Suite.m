@@ -11,7 +11,7 @@
 #import "ALEXJSONValidation.h"
 
 @implementation ALEXJSONValidation_JSON_Schema_Test_Suite {
-	NSURL *_cacheDirectory;
+	NSBundle *_testBundle;
 }
 
 - (void)setUp
@@ -19,31 +19,112 @@
     [super setUp];
     
     // Set-up code here.
-//	NSError *error;
-//	NSFileManager *fm = [NSFileManager defaultManager];
-//	NSURL *cachesURL = [fm URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-//	STAssertNotNil(cachesURL, @"error creating caches directory url: %@", error);
-//	_cacheDirectory = [cachesURL URLByAppendingPathComponent:ALEXJSONValidation_reverseDomainIdentifier];
-//	BOOL created = [fm createDirectoryAtURL:_cacheDirectory withIntermediateDirectories:YES attributes:nil error:&error];
-//	STAssertTrue(created, @"error creating our cache directory: %@", error);
+	if (!_testBundle)
+		_testBundle = [NSBundle bundleForClass:[self class]];
 }
 
 - (void)tearDown
 {
     // Tear-down code here.
-    
+	
     [super tearDown];
 }
 
-- (void)testPropertiesSuite {
-	NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"properties" withExtension:@"json"];
-	[self runTestGroupAtFileURL:fileURL];
+//- (void)testAdditionalItems {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalItems" withExtension:@"json"]];
+//}
+
+//- (void)testAdditionalProperties {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalProperties" withExtension:@"json"]];
+//}
+
+//- (void)testDependencies {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"dependencies" withExtension:@"json"]];
+//}
+
+//- (void)testDisallow {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"disallow" withExtension:@"json"]];
+//}
+
+//- (void)testDivisibleBy {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"divisibleBy" withExtension:@"json"]];
+//}
+
+//- (void)testEnum {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"enum" withExtension:@"json"]];
+//}
+
+//- (void)testExtends {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"extends" withExtension:@"json"]];
+//}
+
+//- (void)testItems {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
+//}
+
+- (void)testMaximum {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maximum" withExtension:@"json"]];
 }
 
-- (void)testTypeSuite {
-	NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"type" withExtension:@"json"];
-	[self runTestGroupAtFileURL:fileURL];
+- (void)testMaxItems {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxItems" withExtension:@"json"]];
 }
+
+- (void)testMaxLength {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxLength" withExtension:@"json"]];
+}
+
+- (void)testMinimum {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minimum" withExtension:@"json"]];
+}
+
+- (void)testMinItems {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minItems" withExtension:@"json"]];
+}
+
+- (void)testMinLength {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minLength" withExtension:@"json"]];
+}
+
+// optional
+//- (void)testBignum {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"bignum" withExtension:@"json"]];
+//}
+
+//- (void)testFormat {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"format" withExtension:@"json"]];
+//}
+
+// end optional
+
+//- (void)testPattern {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"pattern" withExtension:@"json"]];
+//}
+
+//- (void)testPatternProperties {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"patternProperties" withExtension:@"json"]];
+//}
+
+//- (void)testProperties {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"properties" withExtension:@"json"]];
+//}
+
+//- (void)testRef {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"ref" withExtension:@"json"]];
+//}
+
+- (void)testRequired {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"required" withExtension:@"json"]];
+}
+
+- (void)testType {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"type" withExtension:@"json"]];
+}
+
+// TODO: fails 3 uniqueItems tests, because @1 and @YES are considered equal in cocoa, but not in json
+//- (void)testUniqueItems {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"uniqueItems" withExtension:@"json"]];
+//}
 
 
 #pragma mark - helper methods
