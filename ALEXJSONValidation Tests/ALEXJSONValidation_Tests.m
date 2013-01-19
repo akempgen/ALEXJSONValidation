@@ -28,12 +28,24 @@
 
 - (void)testALEXJSONValidation
 {
-	NSDictionary *obj = @{@"name": @"Hans-Peter"};
+//	NSDictionary *obj = @{@"name": @"Hans-Peter"};
+		
+	NSError *inputError;
+	NSURL *url = [NSURL URLWithString:@"http://json-schema.org/schema"];
+	NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&inputError];
+	if (!data) {
+		STFail(@"error fetching input data: %@", inputError);
+	}
+	NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&inputError];
+	if (!obj) {
+		STFail(@"error deserializing json: %@", inputError);
+	}
+	NSLog(@"Obj: %@", obj);
 	
-	NSURL *schemaURL = [NSURL URLWithString:@"http://json-schema.org/address"];
+	NSURL *schemaURL = [NSURL URLWithString:@"http://json-schema.org/hyper-schema"];
 	
 	NSError *error;
-	BOOL success = [ALEXJSONValidation validateJSONObject:obj forJSONSchemaAtURL:schemaURL options:0 error:&error];
+	BOOL success = [ALEXJSONValidation validateJSONObject:obj forSchemaAtURL:schemaURL options:0 error:&error];
 	STAssertTrue(success, @"error: %@", error);
 }
 

@@ -31,16 +31,16 @@
 }
 
 - (void)testAdditionalItems {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalItems" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalItems" withExtension:@"json"]];
 }
 
-//- (void)testAdditionalProperties {
+- (void)testAdditionalProperties {
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalProperties" withExtension:@"json"]];
-//}
+}
 
-//- (void)testDependencies {
+- (void)testDependencies {
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"dependencies" withExtension:@"json"]];
-//}
+}
 
 //- (void)testDisallow {
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"disallow" withExtension:@"json"]];
@@ -59,31 +59,31 @@
 //}
 
 - (void)testItems {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
 }
 
 - (void)testMaximum {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maximum" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maximum" withExtension:@"json"]];
 }
 
 - (void)testMaxItems {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxItems" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxItems" withExtension:@"json"]];
 }
 
 - (void)testMaxLength {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxLength" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxLength" withExtension:@"json"]];
 }
 
 - (void)testMinimum {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minimum" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minimum" withExtension:@"json"]];
 }
 
 - (void)testMinItems {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minItems" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minItems" withExtension:@"json"]];
 }
 
 - (void)testMinLength {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minLength" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minLength" withExtension:@"json"]];
 }
 
 // optional
@@ -105,20 +105,20 @@
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"patternProperties" withExtension:@"json"]];
 //}
 
-//- (void)testProperties {
+- (void)testProperties {
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"properties" withExtension:@"json"]];
-//}
+}
 
-//- (void)testRef {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"ref" withExtension:@"json"]];
-//}
+- (void)testRef {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"ref" withExtension:@"json"]];
+}
 
 - (void)testRequired {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"required" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"required" withExtension:@"json"]];
 }
 
 - (void)testType {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"type" withExtension:@"json"]];
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"type" withExtension:@"json"]];
 }
 
 // TODO: fails 3 uniqueItems tests, because @1 and @YES are considered equal in cocoa, but not in json
@@ -141,7 +141,6 @@
 	for (NSDictionary *testCase in testGroup) {
 		[self runTestCase:testCase];
 	}
-	NSLog(@"====");
 }
 
 - (void)runTestCase:(NSDictionary*)testCase {
@@ -164,7 +163,7 @@
 	NSLog(@"     running test '%@'", description);
 	
 	NSError *error;
-	BOOL valid = [ALEXJSONValidation validateJSONObject:object forJSONSchema:schema error:&error];
+	BOOL valid = [ALEXJSONValidation validateJSONObject:object forSchema:schema error:&error];
 	
 	if (shouldBeValid) {
 		STAssertTrue(valid, @"Test Suite test '%@' should be valid", description);

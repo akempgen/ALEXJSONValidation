@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2CDDCE516A9F26C00ED2224 /* ALEXJSONValidation_JSON-Schema-Test-Suite.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DF62EC16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m */; };
 		C2DF62D216A1714E00CC096A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DF62D116A1714E00CC096A /* SenTestingKit.framework */; };
 		C2DF62D416A1714E00CC096A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DF62D316A1714E00CC096A /* Cocoa.framework */; };
 		C2DF62DE16A1714E00CC096A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2DF62DC16A1714E00CC096A /* InfoPlist.strings */; };
 		C2DF62E916A1720900CC096A /* ALEXJSONValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DF62E816A1720900CC096A /* ALEXJSONValidation.m */; };
-		C2DF62ED16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DF62EC16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m */; };
 		C2DF631416A1C26200CC096A /* additionalItems.json in Resources */ = {isa = PBXBuildFile; fileRef = C2DF62F716A1C26200CC096A /* additionalItems.json */; };
 		C2DF631516A1C26200CC096A /* additionalProperties.json in Resources */ = {isa = PBXBuildFile; fileRef = C2DF62F816A1C26200CC096A /* additionalProperties.json */; };
 		C2DF631616A1C26200CC096A /* dependencies.json in Resources */ = {isa = PBXBuildFile; fileRef = C2DF62F916A1C26200CC096A /* dependencies.json */; };
@@ -47,16 +47,16 @@
 		C2DF62DB16A1714E00CC096A /* ALEXJSONValidation Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ALEXJSONValidation Tests-Info.plist"; sourceTree = "<group>"; };
 		C2DF62DD16A1714E00CC096A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C2DF62DF16A1714E00CC096A /* ALEXJSONValidation_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALEXJSONValidation_Tests.h; sourceTree = "<group>"; };
-		C2DF62E016A1714E00CC096A /* ALEXJSONValidation_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALEXJSONValidation_Tests.m; sourceTree = "<group>"; };
+		C2DF62E016A1714E00CC096A /* ALEXJSONValidation_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ALEXJSONValidation_Tests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C2DF62E216A1714E00CC096A /* ALEXJSONValidation Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ALEXJSONValidation Tests-Prefix.pch"; sourceTree = "<group>"; };
-		C2DF62E716A1720900CC096A /* ALEXJSONValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALEXJSONValidation.h; sourceTree = "<group>"; };
-		C2DF62E816A1720900CC096A /* ALEXJSONValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALEXJSONValidation.m; sourceTree = "<group>"; };
+		C2DF62E716A1720900CC096A /* ALEXJSONValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ALEXJSONValidation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		C2DF62E816A1720900CC096A /* ALEXJSONValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ALEXJSONValidation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C2DF62EA16A18F5300CC096A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C2DF62EB16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALEXJSONValidation_JSON-Schema-Test-Suite.h"; sourceTree = "<group>"; };
-		C2DF62EC16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALEXJSONValidation_JSON-Schema-Test-Suite.m"; sourceTree = "<group>"; };
+		C2DF62EC16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "ALEXJSONValidation_JSON-Schema-Test-Suite.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C2DF62F216A1C26200CC096A /* suite_sanity_check */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = suite_sanity_check; sourceTree = "<group>"; };
 		C2DF62F316A1C26200CC096A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		C2DF62F416A1C26200CC096A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		C2DF62F416A1C26200CC096A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
 		C2DF62F716A1C26200CC096A /* additionalItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = additionalItems.json; sourceTree = "<group>"; };
 		C2DF62F816A1C26200CC096A /* additionalProperties.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = additionalProperties.json; sourceTree = "<group>"; };
 		C2DF62F916A1C26200CC096A /* dependencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dependencies.json; sourceTree = "<group>"; };
@@ -335,7 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2DF62E916A1720900CC096A /* ALEXJSONValidation.m in Sources */,
-				C2DF62ED16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m in Sources */,
+				C2CDDCE516A9F26C00ED2224 /* ALEXJSONValidation_JSON-Schema-Test-Suite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
