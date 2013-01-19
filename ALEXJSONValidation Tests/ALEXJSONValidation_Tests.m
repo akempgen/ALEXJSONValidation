@@ -40,13 +40,12 @@
 	if (!obj) {
 		STFail(@"error deserializing json: %@", inputError);
 	}
-	NSLog(@"Obj: %@", obj);
 	
 	NSURL *schemaURL = [NSURL URLWithString:@"http://json-schema.org/hyper-schema"];
 	
-	NSError *error;
-	BOOL success = [ALEXJSONValidation validateJSONObject:obj forSchemaAtURL:schemaURL options:0 error:&error];
-	STAssertTrue(success, @"error: %@", error);
+	NSError *validationError;
+	BOOL success = [ALEXJSONValidation validateJSONObject:obj forSchemaAtURL:schemaURL options:0 error:&validationError];
+	STAssertTrue(success, @"error: %@", validationError);
 }
 
 @end

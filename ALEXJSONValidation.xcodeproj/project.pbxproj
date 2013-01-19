@@ -38,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C28212C216AB17130054DDCA /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Readme.md; sourceTree = SOURCE_ROOT; };
 		C2DF62CE16A1714E00CC096A /* ALEXJSONValidation Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ALEXJSONValidation Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2DF62D116A1714E00CC096A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C2DF62D316A1714E00CC096A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -98,6 +99,7 @@
 		C2DF62C216A1706F00CC096A = {
 			isa = PBXGroup;
 			children = (
+				C28212C216AB17130054DDCA /* Readme.md */,
 				C2DF62E616A171EB00CC096A /* ALEXJSONValidation */,
 				C2DF62D916A1714E00CC096A /* ALEXJSONValidation Tests */,
 				C2DF62D016A1714E00CC096A /* Frameworks */,
