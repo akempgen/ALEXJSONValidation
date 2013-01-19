@@ -97,40 +97,39 @@
 	NSParameterAssert([schema isKindOfClass:[NSDictionary class]]);
 	
 	// $ref is a special case, current schema will be replaced with a different one
-	NSString *dollarRef = schema[@"$ref"];
-	if (dollarRef) {
-		//			NSDictionary *newRootSchema =[self validatedSchemaForURL:firstPart error:error];
-		
-//		NSLog(@"dollarRef: %@", dollarRef);
-		NSRange hashRange = [dollarRef rangeOfString:@"#"];
-		if (hashRange.location == NSNotFound) {
-			return NO;
-		}
-		NSLog(@"range: %@", NSStringFromRange(hashRange));
-		NSString *schemaURI = [dollarRef substringToIndex:hashRange.location];
-		NSString *jsonPath = [dollarRef substringFromIndex:hashRange.location+hashRange.length];
-		NSDictionary *newRootSchema = rootSchema;
-		// TODO: if schemaURI.length -> newRootSchema = validatedSchemaAtURL
-		
-		NSLog(@"schemaURI: '%@' path: '%@'", schemaURI, jsonPath);
-		NSArray *jsonKeys = [jsonPath componentsSeparatedByString:@"/"];
-		NSMutableArray *keyPaths = [NSMutableArray arrayWithCapacity:[jsonKeys count]];
-		for (NSString *jsonKey in jsonKeys) {
-			if ([jsonKey length]) {
-				[keyPaths addObject:jsonKey];
-			}
-		}
-#warning keypath is not enough, it can also contain array indexes
-		NSString *keyPath = [keyPaths componentsJoinedByString:@"."];
-		NSLog(@"keyPath: %@", keyPath);
-		NSDictionary *refSchema = [rootSchema valueForKeyPath:keyPath];
-		if (![refSchema isKindOfClass:[NSDictionary class]]) {
-			return NO;
-		}
-		else {
-			return [self validateJSONObject:object forSchema:refSchema rootSchema:newRootSchema error:error];
-		}
-	}
+//	NSString *dollarRef = schema[@"$ref"];
+//	if (dollarRef) {
+//		//			NSDictionary *newRootSchema =[self validatedSchemaForURL:firstPart error:error];
+//		
+//		NSRange hashRange = [dollarRef rangeOfString:@"#"];
+//		if (hashRange.location == NSNotFound) {
+//			return NO;
+//		}
+//		NSLog(@"range: %@", NSStringFromRange(hashRange));
+//		NSString *schemaURI = [dollarRef substringToIndex:hashRange.location];
+//		NSString *jsonPath = [dollarRef substringFromIndex:hashRange.location+hashRange.length];
+//		NSDictionary *newRootSchema = rootSchema;
+//		// TODO: if schemaURI.length -> newRootSchema = validatedSchemaAtURL
+//		
+//		NSLog(@"schemaURI: '%@' path: '%@'", schemaURI, jsonPath);
+//		NSArray *jsonKeys = [jsonPath componentsSeparatedByString:@"/"];
+//		NSMutableArray *keyPaths = [NSMutableArray arrayWithCapacity:[jsonKeys count]];
+//		for (NSString *jsonKey in jsonKeys) {
+//			if ([jsonKey length]) {
+//				[keyPaths addObject:jsonKey];
+//			}
+//		}
+//#warning keypath is not enough, it can also contain array indexes
+//		NSString *keyPath = [keyPaths componentsJoinedByString:@"."];
+//		NSLog(@"keyPath: %@", keyPath);
+//		NSDictionary *refSchema = [rootSchema valueForKeyPath:keyPath];
+//		if (![refSchema isKindOfClass:[NSDictionary class]]) {
+//			return NO;
+//		}
+//		else {
+//			return [self validateJSONObject:object forSchema:refSchema rootSchema:newRootSchema error:error];
+//		}
+//	}
 	
 	// normal validation starts here
 	

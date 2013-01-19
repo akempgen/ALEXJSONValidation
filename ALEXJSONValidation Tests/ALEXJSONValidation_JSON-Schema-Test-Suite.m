@@ -50,13 +50,13 @@
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"divisibleBy" withExtension:@"json"]];
 //}
 
-//- (void)testEnum {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"enum" withExtension:@"json"]];
-//}
+- (void)testEnum {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"enum" withExtension:@"json"]];
+}
 
-//- (void)testExtends {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"extends" withExtension:@"json"]];
-//}
+- (void)testExtends {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"extends" withExtension:@"json"]];
+}
 
 - (void)testItems {
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
@@ -109,9 +109,9 @@
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"properties" withExtension:@"json"]];
 }
 
-- (void)testRef {
-	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"ref" withExtension:@"json"]];
-}
+//- (void)testRef {
+//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"ref" withExtension:@"json"]];
+//}
 
 - (void)testRequired {
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"required" withExtension:@"json"]];
