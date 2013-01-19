@@ -31,15 +31,15 @@
 }
 
 - (void)testAdditionalItems {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalItems" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalItems" withExtension:@"json"]];
 }
 
 - (void)testAdditionalProperties {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalProperties" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalProperties" withExtension:@"json"]];
 }
 
 - (void)testDependencies {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"dependencies" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"dependencies" withExtension:@"json"]];
 }
 
 //- (void)testDisallow {
@@ -59,31 +59,31 @@
 }
 
 - (void)testItems {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
 }
 
 - (void)testMaximum {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maximum" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maximum" withExtension:@"json"]];
 }
 
 - (void)testMaxItems {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxItems" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxItems" withExtension:@"json"]];
 }
 
 - (void)testMaxLength {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxLength" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxLength" withExtension:@"json"]];
 }
 
 - (void)testMinimum {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minimum" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minimum" withExtension:@"json"]];
 }
 
 - (void)testMinItems {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minItems" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minItems" withExtension:@"json"]];
 }
 
 - (void)testMinLength {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minLength" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minLength" withExtension:@"json"]];
 }
 
 // optional
@@ -114,11 +114,11 @@
 //}
 
 - (void)testRequired {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"required" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"required" withExtension:@"json"]];
 }
 
 - (void)testType {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"type" withExtension:@"json"]];
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"type" withExtension:@"json"]];
 }
 
 // TODO: fails 3 uniqueItems tests, because @1 and @YES are considered equal in cocoa, but not in json

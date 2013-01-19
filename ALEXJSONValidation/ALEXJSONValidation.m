@@ -134,6 +134,21 @@
 	// normal validation starts here
 	
 	BOOL valid = YES;
+	// extends
+	if (valid) {
+		id extends = schema[@"extends"];
+		if ([extends isKindOfClass:[NSArray class]]) {
+			for (NSDictionary *extendsSchema in extends) {
+				valid = [self validateJSONObject:object forSchema:extendsSchema rootSchema:rootSchema error:error];
+				if (!valid)
+					break;
+			}
+		}
+		else if (extends) {
+			valid = [self validateJSONObject:object forSchema:extends rootSchema:rootSchema error:error];
+		}
+	}
+	
 	// required
 	if (valid) {
 		if ([schema[@"required"] boolValue]) {
@@ -155,6 +170,14 @@
 			valid = [self validateJSONObject:object forType:type rootSchema:rootSchema error:error];
 		}
 			
+	}
+	
+	// enum
+	if (valid) {
+		NSArray *enumArray = schema[@"enum"];
+		if (enumArray) {
+			valid = [enumArray containsObject:object];
+		}
 	}
 	
 	// properties

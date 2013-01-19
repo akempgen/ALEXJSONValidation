@@ -52,7 +52,7 @@ Currently passes some of the tests of the JSON Schema Test Suite (https://github
 License
 -------
 
-© Alexander Kempgen, all rights reserved.
+© 2013 Alexander Kempgen, all rights reserved.
 
 
 Version History
