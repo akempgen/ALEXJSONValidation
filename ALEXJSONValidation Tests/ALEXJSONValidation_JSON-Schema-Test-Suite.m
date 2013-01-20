@@ -56,11 +56,11 @@
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"disallow" withExtension:@"json"]];
 //}
 
-//- (void)testDivisibleBy {
-//if (SKIPTEST) return;
-//
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"divisibleBy" withExtension:@"json"]];
-//}
+- (void)testDivisibleBy {
+if (SKIPTEST) return;
+
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"divisibleBy" withExtension:@"json"]];
+}
 
 - (void)testEnum {
 	if (SKIPTEST) return;

@@ -309,7 +309,7 @@
             NSNumber *divisibleBy = schema[@"divisibleBy"];
             if (divisibleBy) {
                 double result = [object doubleValue] / [divisibleBy doubleValue];
-                valid = result == (result - (int)result);
+                valid = 0 == (result - (int)result);
             }
         }
 	}
