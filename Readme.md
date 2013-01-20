@@ -46,12 +46,15 @@ You could similarily use it to validate the responseJSON of an AFJSONRequestOper
 Status
 ------
 
-Currently passes some of the tests of the JSON Schema Test Suite (https://github.com/json-schema/JSON-Schema-Test-Suite) for draft 3 of the specification.
+Currently passes most of the tests of the JSON Schema Test Suite (https://github.com/json-schema/JSON-Schema-Test-Suite) for draft 3 of the specification, but some big ones are still missing.
+
+Known Bugs: doesn't generate NSErrors when validation fails yet.
 
 
 License
 -------
 
+Will be open sourced later. For now:
 © 2013 Alexander Kempgen, all rights reserved.
 
 

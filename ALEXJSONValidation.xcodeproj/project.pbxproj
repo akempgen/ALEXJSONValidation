@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C24DB16C16AC428E00A153B5 /* ALEXJSONValidation_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DF62E016A1714E00CC096A /* ALEXJSONValidation_Tests.m */; };
 		C2CDDCE516A9F26C00ED2224 /* ALEXJSONValidation_JSON-Schema-Test-Suite.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DF62EC16A1BCA900CC096A /* ALEXJSONValidation_JSON-Schema-Test-Suite.m */; };
 		C2DF62D216A1714E00CC096A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DF62D116A1714E00CC096A /* SenTestingKit.framework */; };
 		C2DF62D416A1714E00CC096A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DF62D316A1714E00CC096A /* Cocoa.framework */; };
@@ -338,6 +339,7 @@
 			files = (
 				C2DF62E916A1720900CC096A /* ALEXJSONValidation.m in Sources */,
 				C2CDDCE516A9F26C00ED2224 /* ALEXJSONValidation_JSON-Schema-Test-Suite.m in Sources */,
+				C24DB16C16AC428E00A153B5 /* ALEXJSONValidation_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
