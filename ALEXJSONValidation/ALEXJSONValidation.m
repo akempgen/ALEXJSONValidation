@@ -308,7 +308,8 @@
         if (valid) {
             NSNumber *divisibleBy = schema[@"divisibleBy"];
             if (divisibleBy) {
-                valid = fmod([object doubleValue], [divisibleBy doubleValue]) < 0.01;
+                double result = [object doubleValue] / [divisibleBy doubleValue];
+                valid = result == (result - (int)result);
             }
         }
 	}
