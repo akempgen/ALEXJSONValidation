@@ -183,10 +183,15 @@
 		}
 	}
 	
+	NSMutableSet *validatedPropertyKeys;
+	
 	// properties
 	if (valid) {
 		NSDictionary *properties = schema[@"properties"];
 //		NSLog(@"object class: %@ properties: %@", NSStringFromClass([object class]), properties);
+		// build validatedPropertyKeys set for additionalProperties check
+		validatedPropertyKeys = [NSMutableSet setWithArray:[properties allKeys]];
+		
 		for (NSString *property in properties) {
 			valid = [self validateJSONObject:object[property] forSchema:properties[property] rootSchema:rootSchema error:error];
 			if (!valid)
@@ -194,23 +199,53 @@
 		}
 	}
 	
+	// patternProperties
+	if (valid) {
+		NSDictionary *patternProperties = schema[@"patternProperties"];
+		for (NSString *propertyPattern in patternProperties) {
+//			NSLog(@"property pattern: %@", propertyPattern);
+			NSError *propertyPatternError;
+			NSRegularExpression *propertyRegEx = [NSRegularExpression regularExpressionWithPattern:propertyPattern options:0 error:&propertyPatternError];
+			if (!propertyRegEx) {
+				valid = NO;
+				break;
+			}
+			for (NSString *objectProperty in object) {
+				NSRange range = NSMakeRange(0, [objectProperty length]);
+				NSTextCheckingResult *result = [propertyRegEx firstMatchInString:objectProperty options:0 range:range];
+				if (result) {
+					// build validatedPropertyKeys set for additionalProperties check
+					if (!validatedPropertyKeys) {
+						validatedPropertyKeys = [NSMutableSet setWithObject:objectProperty];
+					}
+					else {
+						[validatedPropertyKeys addObject:objectProperty];
+					}
+					valid = [self validateJSONObject:object[objectProperty] forSchema:patternProperties[propertyPattern] rootSchema:rootSchema error:error];
+					if (!valid) {
+						break;
+					}
+				}
+			}
+			if (!valid) {
+				break;
+			}
+		}
+	}
+	
 	// additionalProperties
 	if (valid) {
 		id additionalProperties = schema[@"additionalProperties"];
 		if (additionalProperties) {
-			NSDictionary *properties = schema[@"properties"];
+//			NSLog(@"validated properties: %@", validatedPropertyKeys);
 			if ([additionalProperties isKindOfClass:[NSNumber class]]) {
 				if ([additionalProperties boolValue] == NO) {
-					for (NSString *property in object) {
-						valid = (properties[property] != nil);
-						if (!valid)
-							break;
-					}
+					valid = [[NSSet setWithArray:[object allKeys]] isSubsetOfSet:validatedPropertyKeys];
 				}
 			}
 			else if ([additionalProperties isKindOfClass:[NSDictionary class]]) {
 				for (NSString *property in object) {
-					if (!properties[property]) {
+					if (![validatedPropertyKeys containsObject:property]) {
 						valid = [self validateJSONObject:object[property] forSchema:additionalProperties rootSchema:rootSchema error:error];
 						if (!valid)
 							break;
@@ -218,12 +253,6 @@
 				}
 			}
 		}
-	}
-	
-	// patternProperties
-	if (valid) {
-//		NSDictionary *patternProperties = schema[@"patternProperties"];
-//		NSLog(@"patternProperties: %@", patternProperties);
 	}
 	
 	// dependencies
