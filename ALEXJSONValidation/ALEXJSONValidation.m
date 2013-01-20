@@ -27,6 +27,7 @@
 + (BOOL)validateJSONObject:(id)object forSchemaAtURL:(NSURL*)schemaURL options:(ALEXJSONValidationOptions)options error:(NSError**)error {
 	NSParameterAssert([NSJSONSerialization isValidJSONObject:object]);
 	NSParameterAssert([schemaURL isKindOfClass:[NSURL class]]);
+	NSParameterAssert(options == 0);
 	
 	id schema = [self validatedSchemaForURL:schemaURL error:error];
 	
@@ -131,6 +132,15 @@
 //		}
 //	}
 	
+	// required is another special case. if object is nil and not required, it's valid by default
+	if (!object) {
+		BOOL required = [schema[@"required"] boolValue];
+		if (required)
+			return NO;
+		else
+			return YES;
+	}
+	
 	// normal validation starts here
 	
 	BOOL valid = YES;
@@ -149,13 +159,6 @@
 		}
 	}
 	
-	// required
-	if (valid) {
-		if ([schema[@"required"] boolValue]) {
-			valid = (object != nil);
-		}
-	}
-	
 	// type
 	if (valid) {
 		id type = schema[@"type"];
@@ -166,7 +169,7 @@
 					break;
 			}
 		}
-		else if (type) {
+		else if ([type isKindOfClass:[NSString class]]) {
 			valid = [self validateJSONObject:object forType:type rootSchema:rootSchema error:error];
 		}
 			
@@ -182,34 +185,45 @@
 	
 	// properties
 	if (valid) {
-		id properties = schema[@"properties"];
+		NSDictionary *properties = schema[@"properties"];
 //		NSLog(@"object class: %@ properties: %@", NSStringFromClass([object class]), properties);
 		for (NSString *property in properties) {
 			valid = [self validateJSONObject:object[property] forSchema:properties[property] rootSchema:rootSchema error:error];
 			if (!valid)
 				break;
 		}
-		
-		// additional properties
+	}
+	
+	// additionalProperties
+	if (valid) {
 		id additionalProperties = schema[@"additionalProperties"];
-		if ([additionalProperties isKindOfClass:[NSNumber class]]) {
-			if ([additionalProperties boolValue] == NO) {
+		if (additionalProperties) {
+			NSDictionary *properties = schema[@"properties"];
+			if ([additionalProperties isKindOfClass:[NSNumber class]]) {
+				if ([additionalProperties boolValue] == NO) {
+					for (NSString *property in object) {
+						valid = (properties[property] != nil);
+						if (!valid)
+							break;
+					}
+				}
+			}
+			else if ([additionalProperties isKindOfClass:[NSDictionary class]]) {
 				for (NSString *property in object) {
-					valid = (properties[property] != nil);
-					if (!valid)
-						break;
+					if (!properties[property]) {
+						valid = [self validateJSONObject:object[property] forSchema:additionalProperties rootSchema:rootSchema error:error];
+						if (!valid)
+							break;
+					}
 				}
 			}
 		}
-		else if (additionalProperties) {
-			for (NSString *property in object) {
-				if (!properties[property]) {
-					valid = [self validateJSONObject:object[property] forSchema:additionalProperties rootSchema:rootSchema error:error];
-					if (!valid)
-						break;
-				}
-			}
-		}
+	}
+	
+	// patternProperties
+	if (valid) {
+//		NSDictionary *patternProperties = schema[@"patternProperties"];
+//		NSLog(@"patternProperties: %@", patternProperties);
 	}
 	
 	// dependencies

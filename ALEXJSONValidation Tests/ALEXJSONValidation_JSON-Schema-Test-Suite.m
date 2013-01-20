@@ -30,99 +30,147 @@
     [super tearDown];
 }
 
+#define SKIPTEST NO
+
 - (void)testAdditionalItems {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalItems" withExtension:@"json"]];
 }
 
 - (void)testAdditionalProperties {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"additionalProperties" withExtension:@"json"]];
 }
 
 - (void)testDependencies {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"dependencies" withExtension:@"json"]];
 }
 
 //- (void)testDisallow {
+//if (SKIPTEST) return;
+//
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"disallow" withExtension:@"json"]];
 //}
 
 //- (void)testDivisibleBy {
+//if (SKIPTEST) return;
+//
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"divisibleBy" withExtension:@"json"]];
 //}
 
 - (void)testEnum {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"enum" withExtension:@"json"]];
 }
 
 - (void)testExtends {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"extends" withExtension:@"json"]];
 }
 
 - (void)testItems {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"items" withExtension:@"json"]];
 }
 
 - (void)testMaximum {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maximum" withExtension:@"json"]];
 }
 
 - (void)testMaxItems {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxItems" withExtension:@"json"]];
 }
 
 - (void)testMaxLength {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"maxLength" withExtension:@"json"]];
 }
 
 - (void)testMinimum {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minimum" withExtension:@"json"]];
 }
 
 - (void)testMinItems {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minItems" withExtension:@"json"]];
 }
 
 - (void)testMinLength {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"minLength" withExtension:@"json"]];
 }
 
 // optional
 //- (void)testBignum {
+//if (SKIPTEST) return;
+//
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"bignum" withExtension:@"json"]];
 //}
 
 //- (void)testFormat {
+//if (SKIPTEST) return;
+//
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"format" withExtension:@"json"]];
 //}
 
 // end optional
 
 - (void)testPattern {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"pattern" withExtension:@"json"]];
 }
 
-//- (void)testPatternProperties {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"patternProperties" withExtension:@"json"]];
-//}
+- (void)testPatternProperties {
+	if (SKIPTEST) return;
+	
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"patternProperties" withExtension:@"json"]];
+}
 
 - (void)testProperties {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"properties" withExtension:@"json"]];
+	if (SKIPTEST) return;
+	
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"properties" withExtension:@"json"]];
 }
 
 //- (void)testRef {
+//if (SKIPTEST) return;
+//
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"ref" withExtension:@"json"]];
 //}
 
 - (void)testRequired {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"required" withExtension:@"json"]];
 }
 
 - (void)testType {
+	if (SKIPTEST) return;
+	
 	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"type" withExtension:@"json"]];
 }
 
 // TODO: fails 3 uniqueItems tests, because @1 and @YES are considered equal in cocoa, but not in json
 //- (void)testUniqueItems {
+//if (SKIPTEST) return;
+//
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"uniqueItems" withExtension:@"json"]];
 //}
 

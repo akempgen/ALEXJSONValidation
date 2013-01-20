@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#define ALEXJSONValidation_reverseDomainIdentifier @"de.alexander-kempgen.alexjsonvalidation"
+#define ALEXJSONValidation_reverseDomainIdentifier @"alexjsonvalidation"
 
-typedef NS_OPTIONS(NSUInteger, ALEXJSONValidationOptions) {
-	ALEXJSONValidationOptionsFollowSchemaURIs = 1 << 0,
-};
+//typedef NS_OPTIONS(NSUInteger, ALEXJSONValidationOptions) {
+//	ALEXJSONValidationOptionsFollowSchemaURIs = 1 << 0,
+//};
+typedef NSUInteger ALEXJSONValidationOptions;
 
 @interface ALEXJSONValidation : NSObject
 
