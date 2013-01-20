@@ -17,7 +17,7 @@
 
 + (BOOL)validateJSONObject:(id)object forSchema:(NSDictionary*)schema error:(NSError**)error;
 + (BOOL)validateJSONObject:(id)object forSchema:(NSDictionary*)schema rootSchema:(NSDictionary*)rootSchema error:(NSError**)error;
-+(BOOL)validateJSONObject:(id)object forType:(id)type rootSchema:(NSDictionary*)rootSchema error:(NSError**)error;
++ (BOOL)validateJSONObject:(id)object forType:(id)type rootSchema:(NSDictionary*)rootSchema error:(NSError**)error;
 @end
 
 #pragma mark - Implementation
@@ -304,6 +304,13 @@
 					valid = ([object doubleValue] >= [minimum doubleValue]);
 			}
 		}
+        
+        if (valid) {
+            NSNumber *divisibleBy = schema[@"divisibleBy"];
+            if (divisibleBy) {
+                valid = fmod([object doubleValue], [divisibleBy doubleValue]) < 0.01;
+            }
+        }
 	}
 	
 	// 5.2. Validation keywords for strings
