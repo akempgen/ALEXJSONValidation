@@ -280,6 +280,21 @@
 				valid = ([object length] >= [minLength unsignedIntegerValue]);
 			}
 		}
+		
+		if (valid) {
+			NSString *pattern = schema[@"pattern"];
+			if (pattern) {
+				NSError *patternError;
+				NSRegularExpression *regEx = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&patternError];
+				if (!regEx) {
+					valid = NO;
+				}
+				else {
+					NSTextCheckingResult *result = [regEx firstMatchInString:object options:0 range:NSMakeRange(0, [object length])];
+					valid = (result != nil);
+				}
+			}
+		}
 	}
 	
 	// 5.3. Validation keywords for arrays

@@ -97,9 +97,9 @@
 
 // end optional
 
-//- (void)testPattern {
-//	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"pattern" withExtension:@"json"]];
-//}
+- (void)testPattern {
+	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"pattern" withExtension:@"json"]];
+}
 
 //- (void)testPatternProperties {
 //	[self runTestGroupAtFileURL:[_testBundle URLForResource:@"patternProperties" withExtension:@"json"]];
