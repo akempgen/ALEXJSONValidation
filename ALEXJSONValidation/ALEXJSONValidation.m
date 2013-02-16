@@ -439,22 +439,22 @@
 			// number
 			else if ([type isEqualToString:numberType]) {
 				valid = [object isKindOfClass:[NSNumber class]];
-				// TODO: these 4 checks are not good at all
+				// TODO: these 4 checks are not good at all, need to cover more cases or check differently: http://nshipster.com/type-encodings/
 				if (valid)
-					valid = (strncmp([(NSNumber*)object objCType], "q", 1) == 0
-							 || strncmp([(NSNumber*)object objCType], "d", 1) == 0);
+					valid = (strncmp([(NSNumber*)object objCType], @encode(long long), 1) == 0
+							 || strncmp([(NSNumber*)object objCType], @encode(double), 1) == 0);
 			}
 			// integer
 			else if ([type isEqualToString:integerType]) {
 				valid = [object isKindOfClass:[NSNumber class]];
 				if (valid)
-					valid = (strncmp([(NSNumber*)object objCType], "q", 1) == 0);
+					valid = (strncmp([(NSNumber*)object objCType], @encode(long long), 1) == 0);
 			}
 			// boolean
 			else if ([type isEqualToString:booleanType]) {
 				valid = [object isKindOfClass:[NSNumber class]];
 				if (valid)
-					valid = (strncmp([(NSNumber*)object objCType], "c", 1) == 0);
+					valid = (strncmp([(NSNumber*)object objCType], @encode(BOOL), 1) == 0);
 			}
 			// object
 			else if ([type isEqualToString:objectType]) {
